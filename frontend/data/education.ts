@@ -16,4 +16,5 @@ export const education: Education = {
     "Data Mining",
     "Discrete Structures",
   ],
+  photo: "/images/education.jpeg",
 };

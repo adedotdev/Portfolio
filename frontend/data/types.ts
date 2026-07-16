@@ -10,6 +10,7 @@ export interface Profile {
     linkedin: string;
   };
   resumeUrl: string;
+  photo?: string;
 }
 
 export interface Education {
@@ -18,6 +19,7 @@ export interface Education {
   degree: string;
   date: string;
   coursework: string[];
+  photo?: string;
 }
 
 export interface Experience {
@@ -46,4 +48,5 @@ export interface SkillGroup {
 export interface LeadershipRole {
   organization: string;
   role: string;
+  photo?: string;
 }

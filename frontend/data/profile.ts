@@ -12,4 +12,5 @@ export const profile: Profile = {
     linkedin: "https://linkedin.com/in/damiadenugba",
   },
   resumeUrl: "/resume.pdf",
+  photo: "/images/profile.jpeg",
 };
