@@ -1,0 +1,15 @@
+import { Profile } from "./types";
+
+export const profile: Profile = {
+  name: "Dami Adenugba",
+  role: "Systems Software Engineer",
+  tagline: "Building AI-native systems, from GraphRAG platforms to autonomous navigation.",
+  bio: "I'm a Systems Software Engineer at Hyve Solutions, building an AI-native test orchestration platform on Flask and Neo4j with a GraphRAG system powered by GPT-5. I graduated from California State University, Northridge with a B.S. in Computer Science, and previously worked at NASA's Autonomy Research Center (ARCS) developing autonomous navigation for a smart wheelchair. I like working across the stack — from graph-based data models and RAG systems to real-time device interfaces.",
+  location: "Fremont, CA",
+  email: "damidenuga16@gmail.com",
+  links: {
+    github: "https://github.com/adedotdev",
+    linkedin: "https://linkedin.com/in/damiadenugba",
+  },
+  resumeUrl: "/resume.pdf",
+};
