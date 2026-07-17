@@ -1,10 +1,10 @@
 # Portfolio
 
-## Preview
-
 Personal portfolio site — projects, experience, skills, campus involvement, and contact info.
 
 See [planning.md](planning.md) for the full architecture roadmap.
+
+## Preview
 
 ## Structure
 
