@@ -51,4 +51,3 @@ Start the backend first, then the frontend. The frontend expects the API at `htt
 
 ## License
 
-[Add license here, e.g., MIT]
