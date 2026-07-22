@@ -16,5 +16,11 @@ export const education: Education = {
     "Data Mining",
     "Discrete Structures",
   ],
+  affiliations: [
+    { organization: "National Society of Black Engineers", role: "Vice President" },
+    { organization: "Autonomy Research Center for STEAHM", role: "Research Associate" },
+    { organization: "Nigerian Student Association", role: "Historian" },
+    { organization: "Black Student Union", role: "Member" },
+  ],
   photo: "/images/education.jpeg",
 };

@@ -6,12 +6,12 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="mx-auto flex max-w-4xl flex-col-reverse gap-10 px-6 pb-20 pt-24 sm:flex-row sm:items-center sm:pt-32"
+      className="mx-auto flex max-w-6xl flex-col-reverse gap-10 px-4 pb-20 pt-16 sm:flex-row sm:items-center sm:pt-20"
     >
       <div className="flex flex-1 flex-col gap-6">
-        <Reveal>
+        {/* <Reveal>
           <p className="font-mono text-sm text-accent">$ whoami</p>
-        </Reveal>
+        </Reveal> */}
         <Reveal delay={0.05}>
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
             {profile.name}

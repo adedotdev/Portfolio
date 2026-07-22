@@ -4,9 +4,9 @@ import { SectionHeading } from "./section-heading";
 
 export function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-4xl px-6 py-20">
+    <section id="skills" className="mx-auto max-w-6xl px-4 py-20">
       <Reveal>
-        <SectionHeading index="03" title="Skills" />
+        <SectionHeading index="04" title="Skills" />
       </Reveal>
       <div className="grid gap-6 sm:grid-cols-2">
         {skills.map((group, i) => (

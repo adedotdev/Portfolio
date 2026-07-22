@@ -3,6 +3,8 @@ export interface Profile {
   role: string;
   tagline: string;
   bio: string;
+  about: string[];
+  seeking?: string;
   location: string;
   email: string;
   links: {
@@ -19,6 +21,7 @@ export interface Education {
   degree: string;
   date: string;
   coursework: string[];
+  affiliations?: { organization: string; role: string }[];
   photo?: string;
 }
 
@@ -28,6 +31,8 @@ export interface Experience {
   location: string;
   date: string;
   bullets: string[];
+  stack?: string[];
+  photo?: string;
 }
 
 export interface Project {
@@ -48,5 +53,8 @@ export interface SkillGroup {
 export interface LeadershipRole {
   organization: string;
   role: string;
+  date?: string;
+  bullets?: string[];
+  link?: { label: string; href: string };
   photo?: string;
 }

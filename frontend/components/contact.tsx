@@ -5,7 +5,7 @@ import { SectionHeading } from "./section-heading";
 
 export function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-4xl px-6 py-20">
+    <section id="contact" className="mx-auto max-w-6xl px-4 py-20">
       <Reveal>
         <SectionHeading index="06" title="Contact" />
       </Reveal>

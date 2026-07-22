@@ -6,17 +6,25 @@ export function PhotoSlot({
   path,
   className,
   sizes,
+  fit = "cover",
 }: {
   src?: string;
   alt: string;
   path: string;
   className?: string;
   sizes?: string;
+  fit?: "cover" | "contain";
 }) {
   if (src) {
     return (
       <div className={`relative overflow-hidden ${className ?? ""}`}>
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          className={fit === "contain" ? "object-contain p-2" : "object-cover"}
+        />
       </div>
     );
   }
