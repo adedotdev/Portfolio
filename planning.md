@@ -20,7 +20,7 @@ Decisions locked in with the user:
 | 0 — Scaffolding | ✅ Done |
 | 1 — Static frontend MVP | ✅ Done |
 | 2 — FastAPI contact form | ✅ Done (verified end-to-end with a real Resend send) |
-| 3 — Dynamic GitHub project data | Not started |
+| 3 — Dynamic GitHub project data | 🟡 Backend done; not wired into frontend yet |
 | 4 — Database + admin content API | Not started |
 | 5 — Polish | Not started |
 
@@ -78,8 +78,8 @@ Next.js + Tailwind site with all core sections driven by `frontend/data/*.ts`. D
 **Phase 2 — FastAPI contact form** ✅
 FastAPI `POST /contact` endpoint validates input via Pydantic and sends through Resend. Frontend contact form (`contact-form.tsx`) posts to it with loading/success/error states, alongside direct mailto/GitHub/LinkedIn links. Verified end-to-end locally: CORS preflight from `localhost:3000`, a real send via Resend, and a delivered email.
 
-**Phase 3 — Dynamic GitHub project data**
-FastAPI endpoint (`GET /github/projects`) that fetches/caches pinned repos or stats from the GitHub API (simple TTL cache). Frontend project cards consume this for live stars/last-updated info instead of fully static data.
+**Phase 3 — Dynamic GitHub project data** 🟡
+FastAPI endpoint `GET /github/repos/{owner}/{repo}` fetches repo stats (stars, forks, language, last-pushed date) from the GitHub REST API, cached in-memory for 1 hour (`backend/app/routers/github.py`). Verified against a real public repo: correct data, ~8x faster on cache hit, clean 404 for missing repos. **Not yet wired into the frontend** — the two current projects (SyllabAI, Rent-N-Run) don't have public repos yet, so there's nothing to link to. Once a project has a public GitHub repo, add its URL to `githubUrl` in `frontend/data/projects.ts` and have the project card fetch `/github/repos/{owner}/{repo}` to overlay live stats.
 
 **Phase 4 — Database + admin content API**
 Provision Postgres on Render. Add SQLAlchemy models mirroring the current typed-data shapes (profile, education, experience, projects, skills, leadership) + Alembic migrations. Migrate static content into the DB. Add admin-only CRUD endpoints (simple bearer-token/API-key guard, not full auth) so content can be edited without a redeploy. Optionally add a lightweight password-gated admin page in Next.js.

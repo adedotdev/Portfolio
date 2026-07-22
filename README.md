@@ -1,42 +1,30 @@
-# Dami Adenugba — Portfolio
+# Portfolio
 
-Personal portfolio site: experience, projects, skills, campus leadership, and a working contact form. Built as a full-stack learning project — see [planning.md](planning.md) for the full architecture roadmap and phase-by-phase status.
+Personal portfolio site — projects, experience, skills, campus involvement, and contact info. Single-page scrolling layout with anchor-linked sections (`#experience`, `#projects`, `#skills`, `#leadership`, `#education`, `#contact`).
 
-**Live site:** _deploying soon (pending Vercel account recovery)_
+See [planning.md](planning.md) for the full architecture roadmap.
 
-## Tech stack
+## Preview
 
-**Frontend** — Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Framer Motion · next-themes
-
-**Backend** — FastAPI · Pydantic · Resend (email delivery)
+Deploy pending
 
 ## Features
 
-- Single-page site with anchor-linked sections: Experience, Projects, Skills, Leadership, Education, Contact
-- Dark/light mode toggle (dark by default)
-- Scroll-triggered animations
-- Downloadable resume
-- Working contact form — posts to a FastAPI backend, sends email via Resend
+- Dark/light mode toggle (dark-first)
+- Scroll-reveal animations (Framer Motion)
+- Resume download button
+- Contact form (FastAPI + Resend)
 
-## Project structure
+## Structure
 
-```
-Portfolio/
-├── frontend/     Next.js app (TypeScript, Tailwind)
-│   ├── app/       root layout + page
-│   ├── components/
-│   ├── data/       typed content: profile, education, experience, projects, skills, leadership
-│   └── public/     resume.pdf, static assets
-└── backend/      FastAPI app
-    └── app/
-        ├── main.py
-        ├── routers/    contact.py
-        └── core/       config, CORS
-```
+- `frontend/` — Next.js (App Router, TypeScript, Tailwind CSS)
+- `backend/` — FastAPI
 
 ## Getting started
 
 ### Frontend
+
+Requires Node.js 18+.
 
 ```bash
 cd frontend
@@ -44,7 +32,9 @@ npm install
 npm run dev
 ```
 
-Runs at http://localhost:3000. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_API_URL` to your local backend.
+Runs at http://localhost:3000. Copy `.env.example` to `.env.local` and set:
+
+- `NEXT_PUBLIC_API_URL` — URL of the running backend (e.g. `http://localhost:8000` for local dev)
 
 ### Backend
 
@@ -53,13 +43,32 @@ Requires Python 3.11+.
 ```bash
 cd backend
 python -m venv .venv
-.venv\Scripts\activate   # Windows
+
+# macOS/Linux
+source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
+
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Runs at http://localhost:8000. Copy `.env.example` to `.env` and fill in a [Resend](https://resend.com) API key to enable the contact form.
+Runs at http://localhost:8000. Copy `.env.example` to `.env` and set:
 
-## Roadmap
+- `RESEND_API_KEY` — API key from [Resend](https://resend.com)
+- `CONTACT_TO_EMAIL` — inbox that contact form submissions are sent to
+- `CONTACT_FROM_EMAIL` — sender address (e.g. `onboarding@resend.dev` for the sandbox sender)
+- `CORS_ORIGINS` — allowed origins (e.g. `http://localhost:3000`)
 
-See [planning.md](planning.md) for the full phased roadmap — static MVP → contact form (done) → dynamic GitHub project data → database-backed admin API → polish.
+Interactive API docs available at http://localhost:8000/docs.
+
+> **Note:** Without a verified custom domain in Resend, the sandbox sender (`onboarding@resend.dev`) only delivers to the Resend account owner's own inbox. Fine for personal use, but keep in mind if testing with a different `CONTACT_TO_EMAIL`.
+
+### Running both together
+
+Start the backend first, then the frontend. Point `NEXT_PUBLIC_API_URL` at wherever the backend is running.
+
+## License
+
+[Add license here, e.g., MIT]
