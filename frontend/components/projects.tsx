@@ -11,9 +11,9 @@ export function Projects() {
       <div className="grid gap-6 sm:grid-cols-2">
         {projects.map((project, i) => (
           <Reveal key={project.title} delay={i * 0.05}>
-            <div className="flex h-full flex-col rounded-lg border border-border bg-surface p-6">
+            <div className="flex h-full flex-col rounded-lg border border-border p-6">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="text-lg font-semibold text-foreground">
+                <h3 className="font-serif text-lg text-foreground">
                   {project.title}
                 </h3>
                 <span className="font-mono text-xs text-accent">
@@ -27,21 +27,14 @@ export function Projects() {
                     key={bullet}
                     className="flex gap-2 text-sm leading-relaxed text-muted"
                   >
-                    <span className="mt-2 size-1 shrink-0 rounded-full bg-accent" />
+                    <span className="shrink-0 text-accent">→</span>
                     {bullet}
                   </li>
                 ))}
               </ul>
-              <div className="mt-4 flex flex-wrap gap-2 pt-2">
-                {project.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-md border border-border px-2 py-1 font-mono text-xs text-muted"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <p className="mt-4 font-mono text-xs text-muted">
+                {project.stack.join(" · ")}
+              </p>
               {(project.githubUrl || project.liveUrl) && (
                 <div className="mt-4 flex gap-3 font-mono text-xs">
                   {project.githubUrl && (

@@ -11,7 +11,7 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Frameworks/Libraries",
-    items: ["Flask", "FastAPI", "Node.js", "Bootstrap", "React", "Next.js", "LangChain", "Docker"],
+    items: ["Flask", "FastAPI", "Node.js", "Bootstrap", "React", "Next.js", "Tailwind CSS", "Docker", "LangChain", "OpenCV", "Pandas", "NumPy", "scikit-learn"],
   },
   {
     category: "Concepts",

@@ -13,13 +13,14 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Rent-N-Run",
-    subtitle: "Web Development",
-    date: "February 2024 – May 2024",
-    stack: ["Spring Boot", "PostgreSQL", "Postman"],
+    title: "California Jones",
+    subtitle: "Code for a Cause SS12 Hackathon",
+    date: "February 2025",
+    stack: ["C#", "Unity", "Git", "VS Code"],
     bullets: [
-      "Engineered a Spring Boot backend with RESTful APIs to handle client requests, implement CRUD operations, and integrate seamlessly with PostgreSQL for reliable data management",
-      "Designed maintainable controller logic and validated endpoints with automated API tests in Postman, ensuring product reliability and improved performance",
+      "Collaborated with industry professionals in an Agile environment to develop an innovative video game using Unity, designed specifically for individuals with visual impairments",
+      "Devised the game logic with C# by integrating a feedback loop to the user which included volume changes, haptic feedback, and spatial audio, enhancing player navigation",
+      "Outlined the design process and presented a demo to the teams and judges, resulting in a 100% satisfaction rate for all testers and a first place win for the team",
     ],
   },
 ];

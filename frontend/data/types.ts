@@ -2,7 +2,6 @@ export interface Profile {
   name: string;
   role: string;
   tagline: string;
-  bio: string;
   about: string[];
   seeking?: string;
   location: string;

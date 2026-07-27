@@ -21,12 +21,27 @@ Decisions locked in with the user:
 | 1 — Static frontend MVP | ✅ Done |
 | 2 — FastAPI contact form | ✅ Done (verified end-to-end with a real Resend send) |
 | 3 — Dynamic GitHub project data | 🟡 Backend done; not wired into frontend yet |
+| — Content & design polish (post-Phase-3) | ✅ Done — see below |
 | 4 — Database + admin content API | Not started |
-| 5 — Polish | Not started |
+| 5 — Polish | Partially covered by the design pass below; SEO/analytics/CI/tests still open |
 
 **Deployment status:**
 - Vercel (frontend): blocked — the user's Vercel account is stuck in a "deleted-but-not-deleted" backend state (can't sign up or log in with the same email via GitHub, Google, or email code). Support ticket filed; waiting on Vercel support before deploying. Code is deploy-ready and pushed to `main` whenever the account is unblocked.
-- Render (backend): not yet started; planned once Phase 2 work is ready to go live alongside the frontend.
+- Render (backend): not yet started; planned once the frontend is deployable.
+
+## Content & Design Polish (post-Phase-3)
+
+Not part of the original phased roadmap, but a substantial pass done between Phase 3 and Phase 4 to fix the site feeling generic/template-y and add real personal content:
+
+- **New About section** (`components/about.tsx`): LinkedIn bio as two paragraphs plus a "currently seeking full-time roles" status badge.
+- **Education merged into About**: the standalone Education section was removed; a "diploma"-styled card now sits beside the About text in the same section — circular photo, small pin accent, school/degree header, CSUN affiliations listed as `Org · Role` lines (NSBE VP, ARCS Research Associate, NSA Historian, BSU Member), coursework as a flowing comma-separated line, and a `date · location` footer.
+- **Leadership rebuilt**: NSBE promoted to a full-width featured card with real accomplishments (chapter revival, NSBE Jr. chapter founding, membership growth, etc.); ARCS, ColorStack, CodePath, and STEM Advantage given real bullets instead of empty org/role pills. ColorStack links back to `#projects` since it's the same SyllabAI work.
+- **Experience rebuilt**: current role (Hyve Solutions) gets an accent border and a pulsing "Current" badge to visually outrank past roles; each role's bullets condensed from 3 down to 1 dense, impact-preserving sentence; added company logos (`hyve.jpg`, `arcs-logo.jpg`) and per-role tech-stack badges.
+- **`PhotoSlot` component** (`components/photo-slot.tsx`): shared image component used across Hero/About/Leadership/Experience — shows the real image via `next/image` when a data file sets a `photo` path, otherwise renders a dashed placeholder box printing the exact file path to drop the image at. Supports `fit="cover" | "contain"` — `contain` (with inner padding) is used for company logos so they're never cropped, `cover` (default) for real photos.
+- **Sitewide container widened** `max-w-4xl → max-w-6xl` — this, not padding, was the actual fix for the "too much empty space on the sides" complaint.
+- **Subtle dot-grid background texture** added site-wide via `globals.css` (uses the existing `--border` token so it adapts across light/dark).
+- **Mobile nav**: hamburger menu added to `nav.tsx` — section links were previously unreachable below the `sm` breakpoint.
+- Numerous sizing/spacing iterations on photos and top padding based on visual feedback.
 
 ## Actual Architecture (as built)
 
@@ -36,22 +51,25 @@ Portfolio/
 │   ├── app/
 │   │   ├── layout.tsx          root layout: fonts, ThemeProvider, Nav, Footer, metadata
 │   │   ├── page.tsx             assembles all sections in order
-│   │   └── globals.css          Tailwind v4 theme tokens (light/dark via .dark class)
+│   │   └── globals.css          Tailwind v4 theme tokens (light/dark via .dark class) + dot-grid texture
 │   ├── components/
-│   │   ├── nav.tsx, footer.tsx, theme-provider.tsx, theme-toggle.tsx
+│   │   ├── nav.tsx (with mobile menu), footer.tsx, theme-provider.tsx, theme-toggle.tsx
 │   │   ├── reveal.tsx            Framer Motion scroll-in wrapper
 │   │   ├── section-heading.tsx   numbered section heading used across sections
-│   │   ├── hero.tsx, experience.tsx, projects.tsx, skills.tsx,
-│   │   │   leadership.tsx, education.tsx, contact.tsx, contact-form.tsx
+│   │   ├── photo-slot.tsx        shared image-or-placeholder component (cover/contain fit)
+│   │   ├── hero.tsx, about.tsx, experience.tsx, projects.tsx, skills.tsx,
+│   │   │   leadership.tsx, contact.tsx, contact-form.tsx
+│   │   │   (no standalone education.tsx — merged into about.tsx)
 │   ├── data/                     typed content, single source of truth for site copy
 │   │   ├── types.ts              Profile, Education, Experience, Project, SkillGroup, LeadershipRole
 │   │   ├── profile.ts, education.ts, experience.ts, projects.ts, skills.ts, leadership.ts
-│   ├── public/resume.pdf
+│   ├── public/resume.pdf, public/images/ (profile, education, leadership, experience logos)
 │   └── .env.example / .env.local  NEXT_PUBLIC_API_URL
 ├── backend/
 │   ├── app/
 │   │   ├── main.py               FastAPI app, CORS, router registration
 │   │   ├── routers/contact.py    POST /contact — validates via Pydantic, sends via Resend
+│   │   ├── routers/github.py     GET /github/repos/{owner}/{repo} — GitHub stats, 1hr in-memory cache
 │   │   └── core/config.py        pydantic-settings: CORS origins, Resend key, to/from email
 │   ├── requirements.txt
 │   └── .env.example / .env        RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, CORS_ORIGINS
@@ -59,7 +77,7 @@ Portfolio/
 ```
 
 Notable deviations from the original target sketch:
-- **Single page, not multi-route.** All sections (`#experience`, `#projects`, `#skills`, `#leadership`, `#education`, `#contact`) live on `/` with anchor navigation, rather than separate `/projects`, `/experience` routes.
+- **Single page, not multi-route.** All sections (`#about`, `#experience`, `#projects`, `#skills`, `#leadership`, `#contact`) live on `/` with anchor navigation, rather than separate `/projects`, `/experience` routes. Education has no anchor of its own — it lives inside `#about`.
 - **`data/` uses a shared `profile.ts`**, not a `site.ts` — same purpose (name, tagline, bio, contact links, resume path), different filename, defined via a shared `types.ts` interface file.
 - **Resend sandbox sender**: using the default `onboarding@resend.dev` sender (no custom domain verified yet), which only delivers to the Resend account owner's own email — fine for a personal contact form pointed at `damidenuga16@gmail.com`, but will need a verified domain sender if that ever changes.
 
@@ -81,11 +99,13 @@ FastAPI `POST /contact` endpoint validates input via Pydantic and sends through 
 **Phase 3 — Dynamic GitHub project data** 🟡
 FastAPI endpoint `GET /github/repos/{owner}/{repo}` fetches repo stats (stars, forks, language, last-pushed date) from the GitHub REST API, cached in-memory for 1 hour (`backend/app/routers/github.py`). Verified against a real public repo: correct data, ~8x faster on cache hit, clean 404 for missing repos. **Not yet wired into the frontend** — the two current projects (SyllabAI, Rent-N-Run) don't have public repos yet, so there's nothing to link to. Once a project has a public GitHub repo, add its URL to `githubUrl` in `frontend/data/projects.ts` and have the project card fetch `/github/repos/{owner}/{repo}` to overlay live stats.
 
+**(Content & design polish — see dedicated section above)** ✅
+
 **Phase 4 — Database + admin content API**
 Provision Postgres on Render. Add SQLAlchemy models mirroring the current typed-data shapes (profile, education, experience, projects, skills, leadership) + Alembic migrations. Migrate static content into the DB. Add admin-only CRUD endpoints (simple bearer-token/API-key guard, not full auth) so content can be edited without a redeploy. Optionally add a lightweight password-gated admin page in Next.js.
 
 **Phase 5 — Polish (stretch, ordered by likely value)**
-SEO metadata/OpenGraph tags, Vercel Analytics wiring, custom domain, basic lint/test CI (ESLint/Prettier + Ruff/Black), Playwright smoke tests, blog/writing section if wanted later, mobile nav menu (section links currently hide below `sm` breakpoint).
+SEO metadata/OpenGraph tags, Vercel Analytics wiring, custom domain, basic lint/test CI (ESLint/Prettier + Ruff/Black), Playwright smoke tests, blog/writing section if wanted later. (Mobile nav menu is done — see polish section above.)
 
 ## Notes / Open Decisions for Later Phases
 - Admin auth approach (single shared secret vs lightweight session) — decide in Phase 4.

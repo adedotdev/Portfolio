@@ -11,7 +11,7 @@ export const leadership: LeadershipRole[] = [
     photo: "/images/leadership/nsbe.jpeg",
     bullets: [
       "Pioneered the revival of the CSUN-NSBE collegiate chapter, providing strategic counsel to the President and club leadership that successfully recruited 15+ active members",
-      "Managed operations and tasks delegated by the President to completion using project management tools like Jira, ensuring the success of all projects — including the CSUN-NSBE website",
+      "Managed operations and tasks delegated by the President to completion using project management tools like Jira, ensuring the success of all projects, including the CSUN-NSBE website",
       "Established a new NSBE Jr. pre-collegiate chapter in the San Fernando Valley, bridging the gap between pre-collegiate and collegiate levels",
       "Collaborated with partner companies to promote diversity and inclusion initiatives on campus",
     ],
@@ -25,6 +25,15 @@ export const leadership: LeadershipRole[] = [
     ],
   },
   {
+    organization: "Nigerian Student Association (NSA)",
+    role: "Historian",
+    date: "September 2024 – May 2025",
+    photo: "/images/nsa-board.jpeg",
+    bullets: [
+      "Documented major decisions, events, and meetings for the executive board while maintaining a collection of club history and milestones, sharing it with members to foster a cohesive club environment.",
+    ],
+  },
+  {
     organization: "ColorStack",
     role: "Contributor",
     photo: "/images/leadership/colorstack.jpeg",
@@ -35,16 +44,18 @@ export const leadership: LeadershipRole[] = [
   },
   {
     organization: "CodePath",
-    role: "Alumni",
-    // photo: "/images/leadership/codepath.jpeg",
+    role: "Student Fellow/Alumni",
+    photo: "/images/leadership/codepath.jpg",
     bullets: [
-      "Gained a broad understanding of data structures and algorithms through CodePath's technical interview prep course",
-      "Collaborated with students and tech fellows to break down technical problems and build proficiency with code-efficiency techniques",
+      "Completed CodePath's technical interview prep and AI Engineering courses, covering data structures and algorithms, RAG, fine-tuning, multi-tool calling, and AI safety, while collaborating with students and tech fellows to build proficiency with code-efficiency techniques",
     ],
   },
   {
     organization: "STEM Advantage",
     role: "Scholar/Alumni",
-    // photo: "/images/leadership/stem-advantage.jpeg",
+    photo: "/images/leadership/stem-advantage.jpg",
+    bullets: [
+      "This achievement exemplifies the steadfast commitment I’ve invested into my studies, highlights my potential for leadership, and underscores my passion for making meaningful contributions to my field.",
+    ],
   },
 ];

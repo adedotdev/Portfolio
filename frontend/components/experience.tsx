@@ -2,6 +2,7 @@ import { experience } from "@/data/experience";
 import { PhotoSlot } from "./photo-slot";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
+import { Typewriter } from "./typewriter";
 
 export function Experience() {
   const [current, ...past] = experience;
@@ -11,9 +12,9 @@ export function Experience() {
       <Reveal>
         <SectionHeading index="02" title="Experience" />
       </Reveal>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col">
         <Reveal>
-          <div className="flex flex-col gap-6 rounded-lg border border-accent/40 bg-surface p-6 sm:flex-row sm:p-8">
+          <div className="flex flex-col gap-6 border-b border-border py-8 sm:flex-row">
             <PhotoSlot
               src={current.photo}
               alt={current.organization}
@@ -25,10 +26,10 @@ export function Experience() {
             <div className="flex-1">
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <div className="flex flex-wrap items-center gap-3">
-                  <h3 className="text-xl font-semibold text-foreground">
-                    {current.role}
+                  <h3 className="font-serif text-xl text-foreground">
+                    <Typewriter text={current.role} />
                   </h3>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[10px] text-accent">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-accent uppercase">
                     <span className="size-1.5 animate-pulse rounded-full bg-accent" />
                     Current
                   </span>
@@ -52,24 +53,21 @@ export function Experience() {
                 ))}
               </ul>
               {current.stack && (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {current.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-md border border-border px-2 py-1 font-mono text-xs text-muted"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                <p className="mt-4 font-mono text-xs text-muted">
+                  {current.stack.join(" · ")}
+                </p>
               )}
             </div>
           </div>
         </Reveal>
 
-        {past.map((role, i) => (
+        {past.map((role, i, arr) => (
           <Reveal key={role.organization} delay={(i + 1) * 0.05}>
-            <div className="flex flex-col gap-6 rounded-lg border border-border bg-surface p-6 sm:flex-row sm:p-8">
+            <div
+              className={`flex flex-col gap-6 py-8 sm:flex-row ${
+                i < arr.length - 1 ? "border-b border-border" : ""
+              }`}
+            >
               <PhotoSlot
                 src={role.photo}
                 alt={role.organization}
@@ -80,8 +78,8 @@ export function Experience() {
               />
               <div className="flex-1">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="text-lg font-semibold text-foreground">
-                    {role.role}
+                  <h3 className="font-serif text-lg text-foreground">
+                    <Typewriter text={role.role} />
                   </h3>
                   <span className="font-mono text-xs text-accent">
                     {role.date}
@@ -102,16 +100,9 @@ export function Experience() {
                   ))}
                 </ul>
                 {role.stack && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {role.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="rounded-md border border-border px-2 py-1 font-mono text-xs text-muted"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="mt-4 font-mono text-xs text-muted">
+                    {role.stack.join(" · ")}
+                  </p>
                 )}
               </div>
             </div>

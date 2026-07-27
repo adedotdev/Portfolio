@@ -13,15 +13,14 @@ export function Hero() {
           <p className="font-mono text-sm text-accent">$ whoami</p>
         </Reveal> */}
         <Reveal delay={0.05}>
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="font-serif text-5xl text-foreground sm:text-7xl">
             {profile.name}
           </h1>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="max-w-2xl text-lg text-muted">{profile.tagline}</p>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <p className="max-w-2xl leading-relaxed text-muted">{profile.bio}</p>
+          <p className="max-w-2xl text-lg leading-relaxed text-muted">
+            {profile.tagline}
+          </p>
         </Reveal>
         <Reveal delay={0.2}>
           <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-sm">
