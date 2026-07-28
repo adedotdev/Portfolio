@@ -1,19 +1,23 @@
 # Portfolio
 
-Personal portfolio site — projects, experience, skills, campus involvement, and contact info. Single-page scrolling layout with anchor-linked sections (`#experience`, `#projects`, `#skills`, `#leadership`, `#education`, `#contact`).
+Personal portfolio site — about me, experience, projects, skills, campus involvement/leadership, and contact info. Single-page scrolling layout with anchor-linked sections (`#about`, `#experience`, `#projects`, `#skills`, `#leadership`, `#contact`).
 
 See [planning.md](planning.md) for the full architecture roadmap.
 
-## Preview
+## Live
 
-Deploy pending
+**[dami-adenugba.vercel.app](https://dami-adenugba.vercel.app)** — frontend on Vercel, backend on Render, both auto-deploying on every push to `main`.
 
 ## Features
 
+- Serif (Fraunces) + monospace (Geist Mono) type pairing for headings vs. meta info
 - Dark/light mode toggle (dark-first)
-- Scroll-reveal animations (Framer Motion)
+- Rotating 3D dot sphere (Fibonacci sphere distribution, pure CSS)
+- Full-bleed looping skills marquee
+- Typewriter effect on experience role titles
+- Scroll-reveal animations (Framer Motion), respects `prefers-reduced-motion`
 - Resume download button
-- Contact form (FastAPI + Resend)
+- Contact form (FastAPI + Resend), verified end-to-end in production
 
 ## Structure
 
@@ -68,6 +72,12 @@ Interactive API docs available at http://localhost:8000/docs.
 ### Running both together
 
 Start the backend first, then the frontend. Point `NEXT_PUBLIC_API_URL` at wherever the backend is running.
+
+## Deployment
+
+- **Frontend** deploys to [Vercel](https://vercel.com) with **Root Directory** set to `frontend` (this is a monorepo, so this matters). Env var: `NEXT_PUBLIC_API_URL` pointing at the deployed backend.
+- **Backend** deploys to [Render](https://render.com) with **Root Directory** set to `backend`, build command `pip install -r requirements.txt`, start command `uvicorn app.main:app --host 0.0.0.0 --port $PORT`. Env vars: `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, `CORS_ORIGINS` (must include the live frontend's exact origin, **including the `https://` scheme** — a scheme mismatch silently breaks CORS).
+- Both platforms auto-deploy on every push to `main` via GitHub webhook — no manual redeploy step needed for normal changes.
 
 ## License
 
