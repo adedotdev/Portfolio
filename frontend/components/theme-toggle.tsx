@@ -3,6 +3,17 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
+// Some mobile WebKit versions fail to repaint GPU-composited layers (continuous
+// transform animations like the marquee/orb) when only a CSS variable changes
+// upstream via the .dark class toggle. Forcing a reflow after the switch works
+// around it.
+function forceRepaint() {
+  const { body } = document;
+  body.style.display = "none";
+  void body.offsetHeight;
+  body.style.display = "";
+}
+
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -20,7 +31,10 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => {
+        setTheme(isDark ? "light" : "dark");
+        requestAnimationFrame(forceRepaint);
+      }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="flex size-9 items-center justify-center rounded-md border border-border text-muted transition-colors hover:text-foreground hover:border-accent/50 cursor-pointer"
     >

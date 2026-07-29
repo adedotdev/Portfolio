@@ -15,6 +15,6 @@ export const skills: SkillGroup[] = [
   },
   {
     category: "Concepts",
-    items: ["Full-Stack Development", "API Integration", "Agile Methodology", "RAG Systems", "CI/CD Pipelines"],
+    items: ["Full-Stack Development", "API Integration", "Agile Methodology", "RAG Systems", "Multi-Tool Calling", "CI/CD Pipelines"],
   },
 ];
