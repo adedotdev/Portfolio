@@ -3,7 +3,7 @@ export interface Profile {
   role: string;
   tagline: string;
   about: string[];
-  seeking?: string;
+  seeking?: string[];
   location: string;
   email: string;
   links: {

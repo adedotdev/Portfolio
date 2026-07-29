@@ -21,7 +21,7 @@ export function Leadership() {
 
       <div className="flex flex-col">
         <Reveal>
-          <div className="flex flex-col gap-6 border-b border-border py-8 pl-6 sm:flex-row sm:pl-8 border-l-2 border-l-accent">
+          <div className="flex flex-col gap-6 border-b border-border py-8 sm:flex-row">
             <PhotoSlot
               src={featured.photo}
               alt={featured.organization}

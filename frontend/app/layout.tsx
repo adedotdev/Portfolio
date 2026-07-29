@@ -22,9 +22,25 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
+const siteTitle = "Dami's Portfolio";
+
 export const metadata: Metadata = {
-  title: `${profile.name} · ${profile.role}`,
+  title: siteTitle,
   description: profile.tagline,
+  metadataBase: new URL("https://dami-adenugba.vercel.app"),
+  openGraph: {
+    title: siteTitle,
+    description: profile.tagline,
+    url: "https://dami-adenugba.vercel.app",
+    siteName: siteTitle,
+    images: profile.photo ? [profile.photo] : [],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: profile.tagline,
+    images: profile.photo ? [profile.photo] : [],
+  },
 };
 
 export default function RootLayout({

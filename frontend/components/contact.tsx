@@ -12,9 +12,9 @@ export function Contact() {
       <div className="grid gap-10 sm:grid-cols-2 sm:divide-x sm:divide-border">
         <Reveal delay={0.05} className="flex h-full flex-col justify-between sm:pr-10">
           <p className="leading-relaxed text-muted">
-            I&apos;m always open to talking about new opportunities,
-            collaborations, or just software in general. The fastest way to
-            reach me is email, or send a message directly using the form.
+            I look forward to networking with industry colleagues, 
+            exploring new opportunities, and contributing to innovative projects. 
+            Please feel free to reach out with any inquiries or ideas you may have.
           </p>
           <div className="mt-6 flex flex-wrap gap-3 font-mono text-sm">
             <a

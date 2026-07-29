@@ -57,10 +57,19 @@ html {
 }
 
 body {
+  position: relative;
   background-color: var(--background);
-  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* `background-attachment: fixed` scrolls with content on mobile Safari, so the
+   dot-grid texture lives on a fixed-position pseudo-element instead. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 24px 24px;
 }

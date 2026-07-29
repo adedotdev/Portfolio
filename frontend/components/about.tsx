@@ -2,6 +2,7 @@ import { education } from "@/data/education";
 import { profile } from "@/data/profile";
 import { PhotoSlot } from "./photo-slot";
 import { Reveal } from "./reveal";
+import { RotatingText } from "./rotating-text";
 import { SectionHeading } from "./section-heading";
 
 export function About() {
@@ -12,20 +13,21 @@ export function About() {
       </Reveal>
       <div className="grid gap-10 lg:grid-cols-2 lg:divide-x lg:divide-border">
         <Reveal delay={0.05} className="lg:pr-10">
-          <div className="flex h-full flex-col gap-4 leading-relaxed text-muted">
+          <div className="flex flex-col gap-4 leading-relaxed text-muted">
             {profile.about.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          {profile.seeking && (
+          {profile.seeking && profile.seeking.length > 0 && (
             <div className="mt-3 inline-flex items-center gap-2 rounded-md border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-xs text-accent">
               <span className="size-1.5 animate-pulse rounded-full bg-accent" />
-              {profile.seeking}
+              {"Currently "}
+              <RotatingText words={profile.seeking} />
             </div>
           )}
         </Reveal>
 
-        <Reveal delay={0.1} className="lg:pl-10">
+        <Reveal delay={0.1} className="mt-6 lg:mt-0 lg:pl-10">
           <div className="flex items-center gap-4">
             <PhotoSlot
               src={education.photo}

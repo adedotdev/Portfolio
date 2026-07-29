@@ -2,7 +2,6 @@ import { experience } from "@/data/experience";
 import { PhotoSlot } from "./photo-slot";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
-import { Typewriter } from "./typewriter";
 
 export function Experience() {
   const [current, ...past] = experience;
@@ -27,7 +26,7 @@ export function Experience() {
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <div className="flex flex-wrap items-center gap-3">
                   <h3 className="font-serif text-xl text-foreground">
-                    <Typewriter text={current.role} />
+                    {current.role}
                   </h3>
                   <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-accent uppercase">
                     <span className="size-1.5 animate-pulse rounded-full bg-accent" />
@@ -79,7 +78,7 @@ export function Experience() {
               <div className="flex-1">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="font-serif text-lg text-foreground">
-                    <Typewriter text={role.role} />
+                    {role.role}
                   </h3>
                   <span className="font-mono text-xs text-accent">
                     {role.date}

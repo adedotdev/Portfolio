@@ -21,7 +21,7 @@ export const leadership: LeadershipRole[] = [
     role: "Research Associate",
     photo: "/images/leadership/arcs-photo.jpg",
     bullets: [
-      "Led the Senior Design subteam on WATCHER (Wheelchair Assist Technology and Co-bot Helper Robot), a hybrid control scheme with autonomous navigation integrated using state estimation and path planning, enhancing independence for users with low mobility.",
+      "Led the Senior Design subteam on WATCHER (Wheelchair Assist Technology and Co-bot Helper Robot), a hybrid control scheme with autonomous navigation integrated using state estimation and path planning, enhancing independence for users with low mobility",
     ],
   },
   {
@@ -30,7 +30,7 @@ export const leadership: LeadershipRole[] = [
     date: "September 2024 – May 2025",
     photo: "/images/nsa-board.jpeg",
     bullets: [
-      "Documented major decisions, events, and meetings for the executive board while maintaining a collection of club history and milestones, sharing it with members to foster a cohesive club environment.",
+      "Documented major decisions, events, and meetings for the executive board while maintaining a collection of club history and milestones, sharing it with members to foster a cohesive club environment",
     ],
   },
   {
@@ -55,7 +55,8 @@ export const leadership: LeadershipRole[] = [
     role: "Scholar/Alumni",
     photo: "/images/leadership/stem-advantage.jpg",
     bullets: [
-      "This achievement exemplifies the steadfast commitment I’ve invested into my studies, highlights my potential for leadership, and underscores my passion for making meaningful contributions to my field.",
+      "This achievement exemplifies the steadfast commitment I’ve invested into my studies, highlights my potential for leadership, and underscores my passion for making meaningful contributions to my field",
+      "The scholarship program provides opportunities to engage with industry professionals, attend insightful informational sessions, and participate in hands-on collaborative workshops, further demonstrating my strong dedication to both academic and professional excellence"
     ],
   },
 ];
