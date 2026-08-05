@@ -20,7 +20,7 @@ Decisions locked in with the user:
 | 0 — Scaffolding | ✅ Done |
 | 1 — Static frontend MVP | ✅ Done |
 | 2 — FastAPI contact form | ✅ Done (verified end-to-end with a real Resend send) |
-| 3 — Dynamic GitHub project data | 🟡 Backend done; not wired into frontend yet |
+| 3 — Dynamic GitHub project data | ✅ Done |
 | — Content & design polish (post-Phase-3) | ✅ Done — see below |
 | — Visual redesign round 2 (fonts, orb, marquee, typewriter) | ✅ Done — see below |
 | — Deploy to Vercel + Render | ✅ Done — both live, verified end-to-end |
@@ -116,8 +116,12 @@ Next.js + Tailwind site with all core sections driven by `frontend/data/*.ts`. D
 **Phase 2 — FastAPI contact form** ✅
 FastAPI `POST /contact` endpoint validates input via Pydantic and sends through Resend. Frontend contact form (`contact-form.tsx`) posts to it with loading/success/error states, alongside direct mailto/GitHub/LinkedIn links. Verified end-to-end locally: CORS preflight from `localhost:3000`, a real send via Resend, and a delivered email.
 
-**Phase 3 — Dynamic GitHub project data** 🟡
-FastAPI endpoint `GET /github/repos/{owner}/{repo}` fetches repo stats (stars, forks, language, last-pushed date) from the GitHub REST API, cached in-memory for 1 hour (`backend/app/routers/github.py`). Verified against a real public repo: correct data, ~8x faster on cache hit, clean 404 for missing repos. **Not yet wired into the frontend** — the two current projects (SyllabAI, Rent-N-Run) don't have public repos yet, so there's nothing to link to. Once a project has a public GitHub repo, add its URL to `githubUrl` in `frontend/data/projects.ts` and have the project card fetch `/github/repos/{owner}/{repo}` to overlay live stats.
+**Phase 3 — Dynamic GitHub project data** ✅
+FastAPI endpoint `GET /github/repos/{owner}/{repo}` fetches repo stats (stars, forks, language, last-pushed date) from the GitHub REST API, cached in-memory for 1 hour (`backend/app/routers/github.py`). Frontend wiring lives in `frontend/components/projects.tsx`: any project with a `githubUrl` in `data/projects.ts` automatically gets its star count + last-updated date fetched and overlaid on the card. Verified working end-to-end using this site's own repo as a real test case (`adedotdev/Portfolio` — confirmed live stats baked into the build), then removed that entry from `data/projects.ts` since listing the portfolio as a project *within itself* read as too self-referential/redundant next to the footer credit. The infrastructure is fully live and verified — SyllabAI or California Jones will pick up live stats automatically the moment either gets a `githubUrl` set.
+
+Architecturally, this fetch happens **server-side at build time** (`Projects` is an `async` Server Component), not client-side — Next.js bakes the result into the static HTML on each deploy, rather than the visitor's browser fetching it live. Simpler (no loading state / failure UI needed — a failed fetch just falls back to no stats shown for that card) and consistent with the rest of the site being fully static, at the cost of stats only refreshing on the next deploy rather than being truly real-time. Good enough for a personal portfolio; would need reconsidering if live-second freshness ever mattered.
+
+**Local dev gotcha hit during this**: `NEXT_PUBLIC_API_URL=http://localhost:8000` silently failed during `npm run build` even with the backend running — Node's `fetch` resolved `localhost` to the IPv6 loopback (`::1`) first, which nothing was listening on (`uvicorn` without `--host` only binds IPv4). Fixed by using `http://127.0.0.1:8000` explicitly in `.env.local`/`.env.example`. Doesn't affect production (Vercel's build fetches the real `https://portfolio-uzmr.onrender.com` URL, no localhost involved) — local-dev-only footgun, now documented in `.env.example`.
 
 **(Content & design polish — see dedicated section above)** ✅
 
