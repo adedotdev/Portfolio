@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio site — about me, experience, projects, skills, campus involvement/leadership, and contact info. Single-page scrolling layout with anchor-linked sections (`#about`, `#experience`, `#projects`, `#skills`, `#leadership`, `#contact`).
+Personal website: about me, experience, projects, skills, campus involvement/leadership, and contact info. Single-page scrolling layout with anchor-linked sections (`#about`, `#experience`, `#projects`, `#skills`, `#leadership`, `#contact`).
 
 See [planning.md](planning.md) for the full architecture roadmap.
 
