@@ -31,7 +31,6 @@
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-fraunces);
   --animate-marquee: marquee 32s linear infinite;
-  --animate-orb-rotate: orb-rotate 6s linear infinite alternate;
 }
 
 @keyframes marquee {
@@ -40,15 +39,6 @@
   }
   to {
     transform: translateX(-50%);
-  }
-}
-
-@keyframes orb-rotate {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
   }
 }
 
