@@ -5,12 +5,13 @@ export const projects: Project[] = [
     title: "SyllabAI",
     subtitle: "ColorStack Winter Hackathon",
     date: "January 2025",
-    stack: ["Node.js", "OpenAI API", "Postman"],
+    stack: ["Node.js", "TypeScript", "Express", "pgvector", "React", "Docker"],
     bullets: [
-      "Built an AI-powered academic assistant using Node.js and the OpenAI API that parses course syllabi and answers student questions with context-aware responses tied to deadlines, policies, and course structure",
-      "Designed a query routing pipeline that preprocesses user input, injects relevant syllabus context into GPT prompts, and returns structured guidance, reducing average student responsiveness compared to manual syllabus review",
-      "Enhanced user experience by designing an intuitive interface that facilitates easy access to student support resources and AI-generated advice",
+      "Built a RAG pipeline using OpenAI embeddings and a pgvector-backed PostgreSQL store, chunking syllabus text by section and token count and retrieving via cosine-similarity vector search to ground GPT responses in course content and reduce hallucinations",
+      "Added a structured extraction layer using GPT structured outputs (JSON schema) to parse syllabi into normalized Postgres tables (deadlines, grading weights, office hours, policies), routing deterministic queries directly to structured data instead of the LLM to cut latency and cost",
+      "Integrated calendar export functionality (.ics/Google Calendar API) for parsed deadlines, and a custom Q&A evaluation harness to validate retrieval accuracy and track hallucination rate",
     ],
+    githubUrl: "https://github.com/adedotdev/SyllabAI",
   },
   {
     title: "California Jones",
